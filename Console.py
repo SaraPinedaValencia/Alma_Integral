@@ -182,3 +182,6 @@ class View:
         table.add_row(bienvenida)
         console = Console()
         console.print(table)
+
+
+View.product_item_list()

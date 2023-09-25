@@ -1,11 +1,15 @@
-from rich.console import Console
 from Console import View
-from rich.table import Table
-from Users import UserManagement, User, Admin, Employee
-from Products import InventoryManagement, Products
+from Products import Inventory
+from Products import InventoryManagement
+from Users import UserManagement, Admin
 
 
 class Controller:
+
+    mi_inventario = Inventory()
+
+
+
     print("usted va a crear otro usuario administrador, la estructura de este se ve asi: ")
     View.example_register_administrator()
     print("")
@@ -96,28 +100,22 @@ class Controller:
                     precio = int(input("ingrese el precio del producto: "))
                     marca = str(input("ingrese la marca del producto: "))
 
-                    if InventoryManagement.create_product(codigo, nombre, precio, marca):
-                        break
-                    else:
-                        print("No se pudo ingresar el producto , por favor intentelo de nuevo: ")
+                    InventoryManagement.create_product(codigo, nombre, precio, marca)
+                    break
+
 
             # Agregar cantidad de producto
             if choice == 4:
-                print("usted ingreso la opcion de agregar por cantidad un producto, la estructrua se ve algo asi: ")
+                print("usted ingreso la opcion de agregar por cantidad un producto, la estructrura se ve algo asi: ")
                 View.example_create_product()
 
                 print("ahora que usted sabe la estructura de la agregacion del producto, ingrese: ")
-
-                View.product_item_list()
-
-                codigo = int(input("ingrese el codigo del producto que quiere escoger , aqui estan la lista de productos: "))
-
-
+                codigo = str(input("ingrese el codigo del producto que quiere escoger , aqui estan la lista de productos: "))
                 cantidad = int(input("ingrese la cantidad de productos que quiere agregar: "))
 
                 InventoryManagement.quantity_product(codigo, cantidad)
 
-                print(f"los productos actualizados son: {View.product_item_list()}")
+
 
             # Modificar producto
             if choice == 5:
@@ -133,7 +131,7 @@ class Controller:
 
             # Mostrar todos los productos
             if choice == 8:
-                pass
+                View.product_item_list()
 
             # Mostrar todos los usuarios administradores
             if choice == 9:
